@@ -11,7 +11,7 @@ public class ContadorSincronizado {
         System.out.flush();
 
         contador++;
-        
+
         System.out.println(nome + " alterou o valor para: " + contador + ".");
         System.out.flush();
     }
@@ -20,3 +20,12 @@ public class ContadorSincronizado {
         return contador;
     }
 }
+
+/*
+ * OBS: 
+ * System.out.flush(): Java às vezes agrupa caracteres em buffers 
+ * antes de lançar na tela, o que pode bagunçar a ordem visual dos 
+ * prints no terminal de testes. O .flush() força a saída imediata 
+ * do texto, garantindo que o log na tela reflita o instante em que 
+ * a thread passou por ali.
+ */
