@@ -41,10 +41,10 @@
   - É o padrão recomendado para evitar que códigos externos travem sua classe por acidente.
 
 - Auxilia na proteção contra má prática externa: 
-  - Se outra pessoa estivesse usando sua classe e resolvesse fazer algo como `synchronized(suaClasseSincronizada) { Thread.sleep(999999); }` no código dela, ela travaria o seu método sincronizado inteiro se você usasse synchronized(this). 
+  - Se outra pessoa estivesse usando sua classe e resolvesse fazer algo como `synchronized(suaClasseSincronizada) { Thread.sleep(999999); }` no código dela, ela travaria o seu método sincronizado inteiro se você usasse `synchronized(this)`. 
   - Com o objeto `trava` privado, ninguém sabe que esse objeto existe.
   
 - Também auxilia em casos de múltiplas trancas na mesma classe: 
   - Se a sua classe tivesse duas variáveis independentes (ex: `contadorVendas` e `contadorEstoque`), você poderia criar duas trancas privadas distintas (`travaVendas` e `travaEstoque`). 
   - Isso permitiria que uma `thread` mexesse nas vendas e outra no estoque ao mesmo tempo, algo impossível usando o `this`, que bloquearia a classe inteira.
-  
+
