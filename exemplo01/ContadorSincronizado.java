@@ -6,7 +6,7 @@ public class ContadorSincronizado {
      * uma Região Crítica. Se a Thread A chamar este método, a Thread B 
      * será bloqueada na entrada automaticamente.
      */
-    public synchronized void incrementar(String nome) {
+    public synchronized void incrementar(String nome) { // O lock inicia automaticamente aqui.
         System.out.println(nome + " entrou no bloco sincronizado.");
         System.out.flush();
 
@@ -14,7 +14,7 @@ public class ContadorSincronizado {
 
         System.out.println(nome + " alterou o valor para: " + contador + ".");
         System.out.flush();
-    }
+    } // O lock é liberado automaticamente aqui.
 
     public int getContador() {
         return contador;

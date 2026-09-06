@@ -11,13 +11,13 @@ public class ContadorSincronizado {
         System.out.println(nome + " tentando obter o lock...");
         System.out.flush();
 
-        synchronized (this) {
+        synchronized (this) { // O lock no 'this' inicia automaticamente aqui.
             System.out.println(nome + " entrou no bloco sincronizado.");
             System.out.flush();
             contador++;
             System.out.println(nome + " alterou o valor para: " + contador + ".");
             System.out.flush();
-        }
+        } // O lock do 'this' é liberado automaticamente aqui.
 
         System.out.println(nome + " saiu do bloco sincronizado.");
         System.out.flush();

@@ -1,23 +1,27 @@
 public class ContadorSincronizado {
     private int contador = 0;
-
-    /*
-     * A palavra-chave 'synchronized' transforma um bloco em
-     * uma Região Crítica. Se a Thread A entrar neste bloco, a
-     * Thread B será bloqueada na entrada automaticamente.
+    
+    /* --- Objeto Privado Genérico (Lock Dedicado) ---
+     * Usamos 'final' para garantir que a referência do objeto de tranca nunca mude.
      */
+    private final Object trava = new Object();
+
     public void incrementar(String nome) {
-        // Avisa que a thread chegou e vai disputar o cadeado agora:
+        
+        // Log executado FORA do bloco: mostra o momento em que a thread chega para disputar o cadeado (lock):
         System.out.println(nome + " tentando obter o lock...");
         System.out.flush();
 
-        synchronized (this) {
+        // Sincronizamos no objeto privado 'trava' em vez de usar o 'this':
+        synchronized (trava) { // O lock no objeto 'trava' inicia automaticamente aqui.
             System.out.println(nome + " entrou no bloco sincronizado.");
             System.out.flush();
+            
             contador++;
+
             System.out.println(nome + " alterou o valor para: " + contador + ".");
             System.out.flush();
-        }
+        } // O lock no objeto 'trava' é liberado automaticamente aqui.
 
         System.out.println(nome + " saiu do bloco sincronizado.");
         System.out.flush();
