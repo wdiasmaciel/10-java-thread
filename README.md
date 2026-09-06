@@ -128,6 +128,6 @@ Para resolver esse problema de desempenho, você deve implementar o padrão de `
   - Crie a `Thread B` (Logística), que simula um *loop* inserindo 3 bagagens chamando `registrarBagagem`.
   - Dispare as duas *threads* simultaneamente.
   
-  - Console: oo rodar o programa, as mensagens de registro de passageiros e de bagagens devem se misturar de forma limpa. Você deve perceber que, enquanto uma *thread* está executando o bloco seguro de passageiros, a outra *thread* não fica bloqueada para registrar a bagagem, pois os cadeados digitais são completamente diferentes.
+- Console: oo rodar o programa, as mensagens de registro de passageiros e de bagagens devem se misturar de forma limpa. Você deve perceber que, enquanto uma *thread* está executando o bloco seguro de passageiros, a outra *thread* não fica bloqueada para registrar a bagagem, pois os cadeados digitais são completamente diferentes.
   
-  Objetivo: aprender a trabalhar com concorrência fina (*fine-grained locking*), provando que *threads* acessando recursos diferentes no mesmo objeto não precisam esperar uma pela outra na fila se usarem trancas separadas.
+Objetivo: aprender a trabalhar com concorrência fina (*fine-grained locking*), provando que *threads* acessando recursos diferentes no mesmo objeto não precisam esperar uma pela outra na fila se usarem trancas separadas.
