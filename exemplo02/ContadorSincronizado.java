@@ -3,10 +3,13 @@ public class ContadorSincronizado {
 
     /*
      * A palavra-chave 'synchronized' transforma um bloco em
-     * uma Região Crítica. Se a Thread A entrar neste bloco, a 
+     * uma Região Crítica. Se a Thread A entrar neste bloco, a
      * Thread B será bloqueada na entrada automaticamente.
      */
     public void incrementar(String nome) {
+        // Avisa que a thread chegou e vai disputar o cadeado agora:
+        System.out.println(nome + " tentando obter o lock...");
+        System.out.flush();
 
         synchronized (this) {
             System.out.println(nome + " entrou no bloco sincronizado.");
