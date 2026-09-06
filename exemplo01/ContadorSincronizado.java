@@ -8,8 +8,12 @@ public class ContadorSincronizado {
      */
     public synchronized void incrementar(String nome) {
         System.out.println(nome + " entrou no bloco sincronizado.");
+        System.out.flush();
+
         contador++;
-        System.out.println(nome + " alterou o valor para: " + contador);
+        
+        System.out.println(nome + " alterou o valor para: " + contador + ".");
+        System.out.flush();
     }
 
     public int getContador() {
