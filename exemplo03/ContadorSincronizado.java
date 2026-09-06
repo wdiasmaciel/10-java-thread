@@ -8,7 +8,7 @@ public class ContadorSincronizado {
 
     public void incrementar(String nome) {
         
-        // Log executado FORA do bloco: mostra o momento em que a thread chega para disputar o cadeado (lock):
+        // Log executado fora do bloco: mostra o momento em que a thread chega para disputar o cadeado (lock):
         System.out.println(nome + " tentando obter o lock...");
         System.out.flush();
 
