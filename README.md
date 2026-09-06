@@ -48,3 +48,31 @@
   - Se a sua classe tivesse duas variáveis independentes (ex: `contadorVendas` e `contadorEstoque`), você poderia criar duas trancas privadas distintas (`travaVendas` e `travaEstoque`). 
   - Isso permitiria que uma `thread` mexesse nas vendas e outra no estoque ao mesmo tempo, algo impossível usando o `this`, que bloquearia a classe inteira.
 
+# Exercícios
+
+## Painel de Controle de Aeroporto (Múltiplas Trancas Privadas)
+
+Você está desenvolvendo o sistema de monitoramento de um terminal de aeroporto. O sistema precisa gerenciar duas informações em tempo real: o número de passageiros que fizeram *check-in* (`int passageiros`) e a quantidade de bagagens despachadas (`int bagagens`).
+
+Como o fluxo de passageiros e o fluxo de bagagens são processos totalmente independentes, usar `synchronized(this)` travaria o sistema inteiro sempre que uma única bagagem fosse registrada, impedindo que um passageiro fizesse *check-in* no mesmo instante.
+
+Para resolver esse problema de desempenho, você deve implementar o padrão de `múltiplas trancas privadas dedicadas`.
+
+### Requisitos de Implementação:
+- A classe `PainelAeroporto`: crie dois atributos inteiros privados: `passageiros` e `bagagens`, ambos iniciando em 0.
+
+- Crie dois objetos privados e finais para servirem como trancas dedicadas: 
+  - `private final Object travaPassageiros = new Object();`
+  - `private final Object travaBagagens = new Object();`
+  
+- Implemente o método `public void registrarCheckIn(String atendente)`. Ele deve sincronizar apenas na `travaPassageiros`, incrementar o contador de passageiros e exibir o estado na tela usando `System.out.flush()`.
+
+- Implemente o método `public void registrarBagagem(String esteira)`. Ele deve sincronizar apenas na `travaBagagens`, incrementar o contador de bagagens e exibir o estado na tela usando `System.out.flush()`.
+
+- A classe Principal (`Main`): instancie um único objeto `PainelAeroporto`. 
+  - Crie a `Thread A` (Atendimento), que simula um loop inserindo 3 passageiros chamando `registrarCheckIn`.
+  - Crie a `Thread B` (Logística), que simula um *loop* inserindo 3 bagagens chamando `registrarBagagem`.
+  - Dispare as duas *threads* simultaneamente.
+  
+  - Console: oo rodar o programa, as mensagens de registro de passageiros e de bagagens devem se misturar de forma limpa. Você deve perceber que, enquanto uma *thread* está executando o bloco seguro de passageiros, a outra *thread* não fica bloqueada para registrar a bagagem, pois os cadeados digitais são completamente diferentes.
+  
